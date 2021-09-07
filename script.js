@@ -16,13 +16,24 @@ var element_names = ['Hydrogen','Helium','Lithium','Beryllium','Boron','Carbon',
 function doTheThing() {
   var input = getInput();
   
-  var sorry = "<br>Hi your message was: " + input + 
-            "<br>"
-  
-  setOutput(sorry);
+  //var sorry = "<br>Hi your message was: " + input + 
+  //          "<br>"
+  var ret = chemify(input);
+
+
+  setOutput(ret);
   
   return false;
 }
+
+function  chemify(input):
+
+input = input + 'hi';
+
+return input
+
+
+
 // Retrieves the input from the input-field
 function getInput() {
     // Get the input (also keep only letters and convert to lowercase)
