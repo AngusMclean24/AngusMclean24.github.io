@@ -45,7 +45,7 @@ function  chemify(string) {
     }
 */
     //return elements_by_len
-    return len(string)
+    return string.length
 }
 
 
