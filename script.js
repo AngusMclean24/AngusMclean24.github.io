@@ -26,12 +26,11 @@ function doTheThing() {
   return false;
 }
 
-function  chemify(input):
+function  chemify(input) {
+    input = input + 'hi';
 
-input = input + 'hi';
-
-return input
-
+    return input
+}
 
 
 // Retrieves the input from the input-field
