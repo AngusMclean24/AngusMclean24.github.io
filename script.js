@@ -34,18 +34,29 @@ function  chemify(string) {
     var todo = [[string.toLowerCase(),[]]];
     var done = [];
 
-/*
-    while len(todo) > 0 {
+
+    while todo.length > 0 {
         var workon = todo.pop();
         var workon_str = workon[0];
         var workon_list = workon[1];
 
-        for n, elem in en
+        for (index = 0; index < elements_by_len.length; index++) { 
+            var check = workon_str[:n+1]
+            var remainder = workon_str[n+1:]
 
+            if check in elements_by_len[index]{
+                var toadd = [remainder,[*workon_list,check]]
+                if remainder.length == 0{
+                    done.append(toadd[1])
+                } else {
+                    todo.append(toadd)
+                }
+                
+            }
+        } 
     }
-*/
-    //return elements_by_len
-    return string.length
+
+    return done
 }
 
 
