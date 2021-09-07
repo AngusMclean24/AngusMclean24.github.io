@@ -19,7 +19,7 @@ function doTheThing() {
   var sorry = "<br>Hi your message was: " + input + 
             "<br>"
   
-  setOutput(sorry + element_symbols);
+  setOutput(sorry);
   
   return false;
 }
