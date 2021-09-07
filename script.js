@@ -10,6 +10,8 @@ function doTheThing() {
             "<i class=\"fa fa-frown-o\" aria-hidden=\"true\"></i>"
   
   setOutput(sorry);
+  
+  return false;
 }
 // Retrieves the input from the input-field
 function getInput() {
