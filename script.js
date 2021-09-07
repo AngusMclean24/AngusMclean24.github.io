@@ -34,6 +34,7 @@ function  chemify(string) {
     var todo = [[string.toLowerCase(),[]]];
     var done = [];
 
+    console.log(todo.length);
 
     while (todo.length > 0) {
         var workon = todo.pop();
