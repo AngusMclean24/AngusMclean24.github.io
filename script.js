@@ -6,8 +6,8 @@ var chemlist; // Generated spelling of input
 function doTheThing() {
   var input = getInput();
   
-  var sorry = "Hi your message was: " + input + 
-            "<i class=\"fa fa-frown-o\" aria-hidden=\"true\"></i>"
+  var sorry = "<br>Hi your message was: " + input + 
+            "<br>"
   
   setOutput(sorry);
   
