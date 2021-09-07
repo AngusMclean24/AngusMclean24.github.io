@@ -27,9 +27,10 @@ function doTheThing() {
 }
 
 function  chemify(input) {
-    input = input + 'hi';
+    //input = input + 'hi';
+    const elements_by_len = element_symbols.sort((a,b) => a.length - b.length); 
 
-    return input
+    return elements_by_len
 }
 
 
