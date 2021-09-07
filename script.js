@@ -35,7 +35,7 @@ function  chemify(string) {
     var done = [];
 
 
-    while todo.length > 0 {
+    while (todo.length > 0) {
         var workon = todo.pop();
         var workon_str = workon[0];
         var workon_list = workon[1];
@@ -44,9 +44,9 @@ function  chemify(string) {
             var check = workon_str[:n+1]
             var remainder = workon_str[n+1:]
 
-            if check in elements_by_len[index]{
+            if (check in elements_by_len[index]){
                 var toadd = [remainder,[*workon_list,check]]
-                if remainder.length == 0{
+                if (remainder.length == 0){
                     done.append(toadd[1])
                 } else {
                     todo.append(toadd)
