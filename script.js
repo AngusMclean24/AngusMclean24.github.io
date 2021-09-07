@@ -22,15 +22,30 @@ function doTheThing() {
 
 
   setOutput(ret);
+
   
   return false;
 }
 
-function  chemify(input) {
+function  chemify(string) {
     //input = input + 'hi';
     const elements_by_len = element_symbols.sort((a,b) => a.length - b.length); 
 
-    return elements_by_len
+    var todo = [[string.toLowerCase(),[]]];
+    var done = [];
+
+/*
+    while len(todo) > 0 {
+        var workon = todo.pop();
+        var workon_str = workon[0];
+        var workon_list = workon[1];
+
+        for n, elem in en
+
+    }
+*/
+    //return elements_by_len
+    return len(string)
 }
 
 
