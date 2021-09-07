@@ -24,7 +24,7 @@ function getInput() {
 // Writes the output to the output-field on the page
 function setOutput(output) {
     document.getElementsByTagName('output')[0].innerHTML = output;
-    applySizes();
+//    applySizes();
 }
 
 // Debug
