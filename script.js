@@ -118,7 +118,7 @@ function symbols_to_words (str){
 
                 for (i = 0; i < element_symbols.length; i++) {
                     if (singlechar == element_symbols[i]){
-                        output += '/' + element_names[i];
+                        output += '' + element_names[i];
                     }
                 } 
 
@@ -139,7 +139,7 @@ function symbols_to_words (str){
                             if (run == 0){
                                 output += element_names[i];
                             } else {
-                                output += '/' + element_names[i];
+                                output += '' + element_names[i];
                             }
 
                             run ++;
@@ -157,7 +157,7 @@ function symbols_to_words (str){
                             if (run == 0){
                                 output += element_names[i];
                             } else {
-                                output += '/' + element_names[i];
+                                output += '' + element_names[i];
                             }
 
                             run++;
