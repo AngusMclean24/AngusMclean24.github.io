@@ -50,13 +50,14 @@ function translate (str){
     var output = [];
     var word = [];
     var i = 0;
+    var failed = [];
 
     while (i < str.length){
         if (str[i] == ' '){
             output += ' ';
         } else {
            if (isLetter(str[i]) == null) {
-                output += input[i];
+                output += str[i];
             } 
             
 
@@ -66,17 +67,30 @@ function translate (str){
                     i++; 
                 }
                 i--;
-
-                console.log(word);
                 result = chemify(word);
-                result2 = symbols_to_words(result);
+                if (result == 'failed'){
+                    if (failed.length == 0){
+                        failed += "     The following words couldn't be converted needs additional subatomic particles: "
+                        //failed += " {" + word + "} failed to convert needs extra symbols;"; 
+                        failed += " {" + word + "} "; 
+                    } else {
+                        //failed += " {" + word + "} failed to convert needs extra symbols;"; 
+                        failed += " {" + word + "} "; 
+                    }
+                    
+                } else {
+                    result2 = symbols_to_words(result);
+                    output += result2;
+                }
+
                 word = [];
-                output += result2;
+                
             }
         }
-
         i++;
     }
+
+    output += failed;
 
     return output;
 }
