@@ -22,7 +22,7 @@ function doTheThing() {
 
   console.log(ret);
 
-  var out = symbols_to_words(ret);
+  var out = translate (ret);
 
   console.log(out);
 
@@ -165,70 +165,39 @@ function isIn (input) {
     }
 }
 
-function symbols_to_words (str){
-    output = [];
+function translate (str){
+    var output = [];
+    var word = [];
+    var i = 0;
 
-    run = 0;
-
-    var index = 0;
-    while (index < str.length){
-        if (index+1 == str.length){
-            var singlechar = str[index];
-
-            for (i = 0; i < element_symbols.length; i++) {
-                if (singlechar == element_symbols[i]){
-                    output += '-' + element_names[i];
-                }
+    while (i < str.length){
+        if (str[i] == ' '){
+            output += ' ';
+        } else {
+           if (isLetter(str[i]) == null) {
+                output += input[i];
             } 
-
-            index += 1;
-        }
-
-        else {
-            var next = str[index+1];
-            var next_lower = next.toLowerCase();
-
-            if (next == next_lower){
-                console.log("Hello");
-
-                var doublechar = str.substring(index, index+2);
-
-                for (i = 0; i < element_symbols.length; i++) {
-                    if (doublechar == element_symbols[i]){
-                        if (run == 0){
-                            output += element_names[i];
-                        } else {
-                            output += '-' + element_names[i];
-                        }
-
-                        run ++;
-                    }
-                }    
-
-                index += 2;
-            }
+            
 
             else {
-                var singlechar = str[index];
+                while (isLetter(str[i]) != null) {
+                    word += str[i];
+                    i++; 
+                }
+                i--;
 
-                for (i = 0; i < element_symbols.length; i++) {
-                    if (singlechar == element_symbols[i]){
-                        if (run == 0){
-                            output += element_names[i];
-                        } else {
-                            output += '-' + element_names[i];
-                        }
-
-                        run++;
-                    }
-                } 
-
-                index += 1;
+                console.log(word);
+                result = chemify(word);
+                result2 = symbols_to_words(result);
+                word = [];
+                output += result2;
             }
         }
-        console.log(output);
+
+        i++;
     }
 
     return output;
 }
+
 
