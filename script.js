@@ -20,8 +20,9 @@ function doTheThing() {
   //          "<br>"
   var ret = chemify(input);
 
+  var out = symbols_to_words(ret);
 
-  setOutput(ret);
+  setOutput(out);
 
   
   return false;
@@ -158,5 +159,72 @@ function isIn (input) {
     else {
         return 0;
     }
+}
+
+function symbols_to_words (str){
+    output = [];
+
+    run = 0;
+
+    var index = 0;
+    while (index < str.length){
+        if (index+1 == str.length){
+            var singlechar = str[index];
+
+            for (i = 0; i < element_symbols.length; i++) {
+                if (singlechar == element_symbols[i]){
+                    output += '-' + element_names[i];
+                }
+            } 
+
+            index += 1;
+        }
+
+        else {
+            var next = ret[index+1];
+            var next_lower = next.toLowerCase();
+
+            if (next == next_lower){
+                console.log("Hello");
+
+                var doublechar = str.substring(index, index+2);
+
+                for (i = 0; i < element_symbols.length; i++) {
+                    if (doublechar == element_symbols[i]){
+                        if (run == 0){
+                            output += element_names[i];
+                        } else {
+                            output += '-' + element_names[i];
+                        }
+
+                        run ++;
+                    }
+                }    
+
+                index += 2;
+            }
+
+            else {
+                var singlechar = str[index];
+
+                for (i = 0; i < element_symbols.length; i++) {
+                    if (singlechar == element_symbols[i]){
+                        if (run == 0){
+                            output += element_names[i];
+                        } else {
+                            output += '-' + element_names[i];
+                        }
+
+                        run++;
+                    }
+                } 
+
+                index += 1;
+            }
+        }
+        console.log(output);
+    }
+
+    return output;
 }
 
