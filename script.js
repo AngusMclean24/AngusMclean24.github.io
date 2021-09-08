@@ -185,7 +185,7 @@ function symbols_to_words (str){
         }
 
         else {
-            var next = ret[index+1];
+            var next = str[index+1];
             var next_lower = next.toLowerCase();
 
             if (next == next_lower){
