@@ -132,7 +132,7 @@ function chemify(string) {
         
 
         branches = newbranches;
-        console.log(branches);
+        //console.log(branches);
         newbranches = [];
         run++;
 
