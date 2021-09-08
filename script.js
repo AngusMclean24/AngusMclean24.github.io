@@ -22,11 +22,11 @@ function doTheThing() {
 
   console.log(ret);
 
-  var out = translate (ret);
+ // var out = translate (ret);
 
-  console.log(out);
+  //console.log(out);
 
-  setOutput(out);
+  setOutput(ret);
 
   
   return false;
