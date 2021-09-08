@@ -35,7 +35,8 @@ function doTheThing() {
 // Retrieves the input from the input-field
 function getInput() {
     // Get the input (also keep only letters and convert to lowercase)
-    var input = document.getElementById('input').value.toLowerCase().replace(/[^a-zA-Z]/g, "");
+    //var input = document.getElementById('input').value.toLowerCase().replace(/[^a-zA-Z]/g, "");
+    var input = document.getElementById('input').value.toLowerCase();
     document.getElementById('input').value = input; // Update content of inputfield
     return input;
 }
