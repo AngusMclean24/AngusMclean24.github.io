@@ -130,7 +130,6 @@ function symbols_to_words (str){
                 var next_lower = next.toLowerCase();
 
                 if (next == next_lower){
-                    console.log("Hello");
 
                     var doublechar = str.substring(index, index+2);
 
@@ -293,4 +292,6 @@ function isIn (input) {
     }
 }
 
+
+//hello
 
