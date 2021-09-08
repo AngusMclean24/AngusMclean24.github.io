@@ -42,15 +42,17 @@ function  chemify(string) {
         var workon_list = workon[1];
 
         for (index = 0; index < elements_by_len.length; index++) { 
-            var check = workon_str[:n+1]
-            var remainder = workon_str[n+1:]
+            //var check = workon_str[:n+1];
+            var check = workon_str.slice(0, index+1);
+            //var remainder = workon_str[n+1:];
+            var remainder = workon_str.slice(index+1, elements_by_len.length);
 
             if (check in elements_by_len[index]){
-                var toadd = [remainder,[*workon_list,check]]
+                var toadd = [remainder,[*workon_list,check]];
                 if (remainder.length == 0){
-                    done.append(toadd[1])
+                    done.append(toadd[1]);
                 } else {
-                    todo.append(toadd)
+                    todo.append(toadd);
                 }
                 
             }
