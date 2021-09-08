@@ -27,44 +27,6 @@ function doTheThing() {
   return false;
 }
 
-function  chemify(string) {
-    //input = input + 'hi';
-    const elements_by_len = element_symbols.sort((a,b) => a.length - b.length); 
-
-    var todo = [[string.toLowerCase(),[]]];
-    var done = [];
-
-    console.log(todo.length);
-
-    while (todo.length > 0) {
-        var workon = todo.pop();
-        var workon_str = workon[0];
-        var workon_list = workon[1];
-
-        for (index = 0; index < elements_by_len.length; index++) { 
-            //var check = workon_str[:n+1];
-            var check = workon_str.slice(0, index+1);
-            //var remainder = workon_str[n+1:];
-            var remainder = workon_str.slice(index+1, elements_by_len.length);
-
-
-            //if (check in elements_by_len[index]){
-            if (elements_by_len.includes(check) == true){
-                var toadd = [remainder,[workon_list.join(''),check]];
-                if (remainder.length == 0){
-                    done.append(toadd[1]);
-                } else {
-                    todo.append(toadd);
-                }
-                
-            }
-        } 
-    }
-
-    return done
-}
-
-
 // Retrieves the input from the input-field
 function getInput() {
     // Get the input (also keep only letters and convert to lowercase)
@@ -82,5 +44,119 @@ function setOutput(output) {
 // Debug
 function p(line) {
     console.log(line);
+}
+
+function chemify(string) {
+
+    var state = 'hello'
+    var branches = [];
+    var newbranches = [];
+
+    var run = 0;
+
+    //need to do firt step in branch manually    
+
+    
+    while ((state != 'done' ) && (state != 'failed')){
+        if (run == 0){
+            if (string.length == 1){
+                var singlechar = string[0]
+                if (isIn(singlechar) == 1){
+                    var solution = singlechar.toUpperCase();
+                    state = 'done' 
+                    break;
+                } else {
+                    state = 'failed'
+                    break;
+                }
+            } else {
+                var singlechar = string[0]
+                var doublechar = string.substring(0, 2);
+
+                if (isIn(singlechar) == 1){
+                        branches.push(singlechar.toUpperCase());
+                }
+
+                if (isIn(doublechar) == 1){
+                        var firstletter = doublechar[0];
+                        firstletter = firstletter.toUpperCase();
+
+                        doublechar = firstletter + doublechar[1];
+                        branches.push(doublechar);  
+                } 
+
+            }
+        }
+
+        if (branches.length == 0) {
+                state = 'failed';
+                break;
+
+        }  else {
+            for (index=0; index < branches.length; index++){
+                branch = branches[index];
+                var branchposition = branch.length;
+
+                if (branchposition == string.length){
+                    state = 'done';
+                    var solution = branch;
+                    break;
+                }
+
+                else if ((branchposition+1) == string.length){
+                    var singlechar = string[branchposition]
+                    if (isIn(singlechar) == 1){
+                        newbranches.push(branch+singlechar.toUpperCase());
+                    }
+                }
+
+                else {
+                    var singlechar = string[branchposition]
+                    var doublechar = string.substring(branchposition, branchposition+2);
+
+                    if (isIn(singlechar) == 1){
+                        newbranches.push(branch+singlechar.toUpperCase());
+                    }
+
+                    if (isIn(doublechar) == 1){
+                        var firstletter = doublechar[0];
+                        firstletter = firstletter.toUpperCase();
+
+                        doublechar = firstletter + doublechar[1];
+                        newbranches.push(branch+doublechar);  
+                    } 
+                }
+            }
+        }
+        
+
+        branches = newbranches;
+        console.log(branches);
+        newbranches = [];
+        run++;
+
+    }
+
+    if (state == 'done') {
+       return solution;
+    } else {
+        return state;
+    }
+    
+
+}
+
+
+function isIn (input) {
+    input = input.toLowerCase();
+    const symbols = element_symbols.map(name => name.toLowerCase());
+
+    if (symbols.includes(input) == true) {
+        return 1;
+    } 
+
+    else {
+        return 0;
+    }
 }
 
