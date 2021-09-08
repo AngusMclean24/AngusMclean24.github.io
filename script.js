@@ -47,7 +47,9 @@ function  chemify(string) {
             //var remainder = workon_str[n+1:];
             var remainder = workon_str.slice(index+1, elements_by_len.length);
 
-            if (check in elements_by_len[index]){
+
+            //if (check in elements_by_len[index]){
+            if (elements_by_len.includes(check) == true){
                 var toadd = [remainder,[workon_list.join(''),check]];
                 if (remainder.length == 0){
                     done.append(toadd[1]);
