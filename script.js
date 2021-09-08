@@ -18,15 +18,14 @@ function doTheThing() {
   
   //var sorry = "<br>Hi your message was: " + input + 
   //          "<br>"
-  var ret = chemify(input);
+  //setOutput(input);
 
-  console.log(ret);
 
- // var out = translate (ret);
+  var out = translate (input);
 
-  //console.log(out);
+  console.log(out);
 
-  setOutput(ret);
+  setOutput(out);
 
   
   return false;
@@ -47,21 +46,136 @@ function setOutput(output) {
 //    applySizes();
 }
 
-// Debug
-function p(line) {
-    console.log(line);
+function translate (str){
+    var output = [];
+    var word = [];
+    var i = 0;
+
+    while (i < str.length){
+        if (str[i] == ' '){
+            output += ' ';
+        } else {
+           if (isLetter(str[i]) == null) {
+                output += input[i];
+            } 
+            
+
+            else {
+                while (isLetter(str[i]) != null) {
+                    word += str[i];
+                    i++; 
+                }
+                i--;
+
+                console.log(word);
+                result = chemify(word);
+                result2 = symbols_to_words(result);
+                word = [];
+                output += result2;
+            }
+        }
+
+        i++;
+    }
+
+    return output;
 }
 
-function chemify(string) {
+function symbols_to_words (str){
+    output = [];
 
+    run = 0;
+
+    var index = 0;
+
+    if (str.length == 1){
+        var singlechar = str[0];
+        for (i = 0; i < element_symbols.length; i++) {
+            if (singlechar == element_symbols[i]){
+                output += element_names[i];
+            }
+        }
+    }
+
+    else {
+          while (index < str.length){
+            if (index+1 == str.length){
+                var singlechar = str[index];
+
+                for (i = 0; i < element_symbols.length; i++) {
+                    if (singlechar == element_symbols[i]){
+                        output += '-' + element_names[i];
+                    }
+                } 
+
+                index += 1;
+            }
+
+            else {
+                var next = str[index+1];
+                var next_lower = next.toLowerCase();
+
+                if (next == next_lower){
+                    console.log("Hello");
+
+                    var doublechar = str.substring(index, index+2);
+
+                    for (i = 0; i < element_symbols.length; i++) {
+                        if (doublechar == element_symbols[i]){
+                            if (run == 0){
+                                output += element_names[i];
+                            } else {
+                                output += '-' + element_names[i];
+                            }
+
+                            run ++;
+                        }
+                    }    
+
+                    index += 2;
+                }
+
+                else {
+                    var singlechar = str[index];
+
+                    for (i = 0; i < element_symbols.length; i++) {
+                        if (singlechar == element_symbols[i]){
+                            if (run == 0){
+                                output += element_names[i];
+                            } else {
+                                output += '-' + element_names[i];
+                            }
+
+                            run++;
+                        }
+                    } 
+
+                    index += 1;
+                }
+            }
+            console.log(output);
+        }
+    }
+
+  
+
+    return output;
+}
+
+function isLetter(str) {
+    if (str == null){
+        return null
+    } else {
+        return str.length === 1 && str.match(/[a-zA-Z]/i);
+    }
+}
+
+function  chemify(string) {
     var state = 'hello'
     var branches = [];
     var newbranches = [];
 
     var run = 0;
-
-    //need to do firt step in branch manually    
-
     
     while ((state != 'done' ) && (state != 'failed')){
         if (run == 0){
@@ -152,7 +266,6 @@ function chemify(string) {
 
 }
 
-
 function isIn (input) {
     input = input.toLowerCase();
     const symbols = element_symbols.map(name => name.toLowerCase());
@@ -164,41 +277,6 @@ function isIn (input) {
     else {
         return 0;
     }
-}
-
-function translate (str){
-    var output = [];
-    var word = [];
-    var i = 0;
-
-    while (i < str.length){
-        if (str[i] == ' '){
-            output += ' ';
-        } else {
-           if (isLetter(str[i]) == null) {
-                output += input[i];
-            } 
-            
-
-            else {
-                while (isLetter(str[i]) != null) {
-                    word += str[i];
-                    i++; 
-                }
-                i--;
-
-                console.log(word);
-                result = chemify(word);
-                result2 = symbols_to_words(result);
-                word = [];
-                output += result2;
-            }
-        }
-
-        i++;
-    }
-
-    return output;
 }
 
 
