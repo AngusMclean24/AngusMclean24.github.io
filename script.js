@@ -19,13 +19,33 @@ var expanded = false;
 function doTheThing() {
     showCheckboxes(false);
 
-    var input = getInput();
+    var input = getInput('myInput');
+
+    /*
+    if (input.length == 0) {
+        console.log("hi")
+        document.getElementById('answer').innerHTML = '<i class="fa fa-flask fa-2x" aria-hidden="true"></i>';
+    }
+    */
+
     //console.log(input);  
     checkCheckboxes();
 
     var out = translate (input);
 
-    setOutput(out);
+    setOutput(out, 'answer');
+   
+
+    return false;
+
+}
+
+function doTheOtherThing() {
+    showCheckboxes(false);
+
+    var input = getInput('myInput2');
+
+    setOutput(input, 'answer2');
    
     //console.log("hi");
 
@@ -33,17 +53,18 @@ function doTheThing() {
 
 }
 
-function setOutput(output) {
-    document.getElementsByTagName('output')[0].innerHTML = output;
+
+function setOutput(output, str) {
+    document.getElementById(str).innerHTML = output;
 //    applySizes();
 }
 
-function getInput() {
+function getInput(str) {
     // Get the input (also keep only letters and convert to lowercase)
     //var input = document.getElementById('input').value.toLowerCase().replace(/[^a-zA-Z]/g, "");
-    var input = document.getElementById('myInput').value.toLowerCase();
+    var input = document.getElementById(str).value.toLowerCase();
 
-    document.getElementById('myInput').value = input; // Update content of inputfield
+    document.getElementById(str).value = input; // Update content of inputfield
     return input;
 }
 
