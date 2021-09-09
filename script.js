@@ -6,42 +6,154 @@ var element_symbols = ['H','He','Li','Be','B','C','N','O','F','Ne',
 'Lu','Hf','Ta','W','Re','Os','Ir','Pt','Au','Hg','Tl','Pb','Bi','Po','At',
 'Rn','Fr','Ra','Ac','Th','Pa','U','Np','Pu','Am','Cm','Bk','Cf','Es','Fm','Md',
 'No','Lr','Rf','Db','Sg','Bh','Hs','Mt','Ds','Rg','Cn','Nh','Fl','Mc','Lv','Ts',
-'Og','E', 'G', 'L', 'M','A', 'Z', 'J', 'T', 'Q', 'D', 'X', 'R']
+'Og'];
 
-var element_names = ['Hydrogen','Helium','Lithium','Beryllium','Boron','Carbon','Nitrogen','Oxygen','Fluorine','Neon','Sodium','Magnesium','Aluminium','Silicon','Phosphorus','Sulfur','Chlorine','Argon','Potassium','Calcium','Scandium','Titanium','Vanadium','Chromium','Manganese','Iron','Cobalt','Nickel','Copper','Zinc','Gallium','Germanium','Arsenic','Selenium','Bromine','Krypton','Rubidium','Strontium','Yttrium','Zirconium','Niobium','Molybdenum','Technetium','Ruthenium','Rhodium','Palladium','Silver','Cadmium','Indium','Tin','Antimony','Tellurium','Iodine','Xenon','Caesium','Barium','Lanthanum','Cerium','Praseodymium','Neodymium','Promethium','Samarium','Europium','Gadolinium','Terbium','Dysprosium','Holmium','Erbium','Thulium','Ytterbium','Lutetium','Hafnium','Tantalum','Tungsten','Rhenium','Osmium','Iridium','Platinum','Gold','Mercury','Thallium','Lead','Bismuth','Polonium','Astatine','Radon','Francium','Radium','Actinium','Thorium','Protactinium','Uranium','Neptunium','Plutonium','Americium','Curium','Berkelium','Californium','Einsteinium','Fermium','Mendelevium','Nobelium','Lawrencium','Rutherfordium','Dubnium','Seaborgium','Bohrium','Hassium','Meitnerium','Darmstadtium','Roentgenium','Copernicium','Nihonium','Flerovium','Moscovium','Livermorium','Tennessine','Oganesson','Electron', 'Gluon', 'Lepton', 'Mass', 'Alpha-Particle', 'Z-Boson', 'Joule', 'Tau', 'Quark', 'Deuterium', 'X-Boson', 'Roentgen']
+var element_names = ['Hydrogen','Helium','Lithium','Beryllium','Boron','Carbon','Nitrogen','Oxygen','Fluorine','Neon','Sodium','Magnesium','Aluminium','Silicon','Phosphorus','Sulfur','Chlorine','Argon','Potassium','Calcium','Scandium','Titanium','Vanadium','Chromium','Manganese','Iron','Cobalt','Nickel','Copper','Zinc','Gallium','Germanium','Arsenic','Selenium','Bromine','Krypton','Rubidium','Strontium','Yttrium','Zirconium','Niobium','Molybdenum','Technetium','Ruthenium','Rhodium','Palladium','Silver','Cadmium','Indium','Tin','Antimony','Tellurium','Iodine','Xenon','Cesium','Barium','Lanthanum','Cerium','Praseodymium','Neodymium','Promethium','Samarium','Europium','Gadolinium','Terbium','Dysprosium','Holmium','Erbium','Thulium','Ytterbium','Lutetium','Hafnium','Tantalum','Tungsten','Rhenium','Osmium','Iridium','Platinum','Gold','Mercury','Thallium','Lead','Bismuth','Polonium','Astatine','Radon','Francium','Radium','Actinium','Thorium','Protactinium','Uranium','Neptunium','Plutonium','Americium','Curium','Berkelium','Californium','Einsteinium','Fermium','Mendelevium','Nobelium','Lawrencium','Rutherfordium','Dubnium','Seaborgium','Bohrium','Hassium','Meitnerium','Darmstadtium','Roentgenium','Copernicium','Nihonium','Flerovium','Moscovium','Livermorium','Tennessine','Oganesson'];
+
+var extra_symbols = ['E', 'G', 'L', 'M','A', 'Z', 'J', 'T', 'Q', 'D', 'X', 'R'];
+var extra_names = ['Electron', 'Gluon', 'Lepton', 'Mass', 'AlphaParticle', 'ZBoson', 'Joule', 'Tau', 'Quark', 'Deuterium', 'XBoson', 'Roentgen'];
+
+var expanded = false;
 
 
-// Triggers when the try-button is pressed
-// Gets input, makes a filtered list and outputs to page
 function doTheThing() {
-  var input = getInput();
-  
-  //var sorry = "<br>Hi your message was: " + input + 
-  //          "<br>"
-  //setOutput(input);
+    showCheckboxes(false);
 
+    var input = getInput();
+    //console.log(input);  
+    checkCheckboxes();
 
-  var out = translate (input);
+    var out = translate (input);
 
-  setOutput(out);
+    setOutput(out);
+   
+    //console.log("hi");
 
-  
-  return false;
+    return false;
+
 }
 
-// Retrieves the input from the input-field
-function getInput() {
-    // Get the input (also keep only letters and convert to lowercase)
-    //var input = document.getElementById('input').value.toLowerCase().replace(/[^a-zA-Z]/g, "");
-    var input = document.getElementById('input').value.toLowerCase();
-    document.getElementById('input').value = input; // Update content of inputfield
-    return input;
-}
-
-// Writes the output to the output-field on the page
 function setOutput(output) {
     document.getElementsByTagName('output')[0].innerHTML = output;
 //    applySizes();
+}
+
+function getInput() {
+    // Get the input (also keep only letters and convert to lowercase)
+    //var input = document.getElementById('input').value.toLowerCase().replace(/[^a-zA-Z]/g, "");
+    var input = document.getElementById('myInput').value.toLowerCase();
+
+    document.getElementById('myInput').value = input; // Update content of inputfield
+    return input;
+}
+
+
+function showCheckboxes(state) {
+  var checkboxes = document.getElementById("checkboxes");
+  var answer = document.getElementById("answer");
+
+  if (!expanded) {
+    if (state == true) {
+        checkboxes.style.display = "block";
+        answer.style.display = "none";
+        document.getElementById("options").innerHTML = '&uarr;';
+        expanded = true;
+    } 
+  } else {
+    checkboxes.style.display = "none";
+    answer.style.display = "block";
+    document.getElementById("options").innerHTML = '&darr;';
+    expanded = false;
+    
+  }
+
+    return false;
+}
+
+function checkCheckboxes(){
+    for (index = 0; index<extra_symbols.length; index++){
+        var number = index + 1;
+        var n = number.toString();
+
+        var temp = document.getElementById(n); 
+        
+        var isthere = element_symbols.indexOf(extra_symbols[index]);
+        console.log (isthere);
+        
+        if(temp.checked == true){
+            if (isthere > -1){
+
+            } else {
+                element_symbols.push(extra_symbols[index]);
+                element_names.push(extra_names[index]); 
+            }  
+        }
+
+        else {
+            if (isthere > -1){
+                element_symbols.splice(isthere, 1);
+                element_names.splice(isthere, 1);
+                console.log("hi3");         
+            }
+
+        }
+    }
+
+}
+
+function selectAll(){ 
+    var checkboxes = document.querySelectorAll('input[type="checkbox"]');
+    if (document.getElementById("select").textContent == 'Select All'){
+        document.getElementById("select").textContent = 'Deselect All';
+        for (var checkbox of checkboxes) {
+            checkbox.checked = true;
+        }
+    }   else {
+        document.getElementById("select").textContent = 'Select All';
+        for (var checkbox of checkboxes) {
+            checkbox.checked = false;
+        }
+
+    } 
+    return false;
+}
+
+function changeMode() {
+    var dropdown = document.getElementById("ddlViewBy");
+    decrypt.style.display = "none";
+    encrypt.style.display = "none";
+    var fix = 0;
+
+    if (dropdown.value == 1){
+        fix = 1;
+        //console.log("hi");
+        //document.getElementById("decrypt").style.display = "none";
+        //document.getElementById("encrypt").style.display = "none"; 
+        //decrypt.style.display = "none";     
+    }
+
+
+    if (dropdown.value == 2) {
+        //console.log("hi");
+        document.getElementById("encrypt").style.display = "block";
+        //document.getElementById("decrypt").style.display = "none";
+        //decrypt.style.display = "none";
+        //decrypt.style.display = "none";
+    }
+
+    else {
+        //document.getElementById("encrypt").style.display = "none";
+        document.getElementById("decrypt").style.display = "block";
+        //decrypt.style.display = "none";
+    }
+
+    if (fix == 1) {
+        decrypt.style.display = "none";
+    }
+
+    fix = 0;
+
+    return false;
 }
 
 function translate (str){
@@ -291,7 +403,4 @@ function isIn (input) {
         return 0;
     }
 }
-
-
-//hello
 
