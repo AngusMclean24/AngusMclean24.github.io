@@ -23,8 +23,6 @@ function doTheThing() {
 
   var out = translate (input);
 
-  console.log(out);
-
   setOutput(out);
 
   
@@ -166,7 +164,7 @@ function symbols_to_words (str){
                     index += 1;
                 }
             }
-            console.log(output);
+
         }
     }
 
@@ -264,6 +262,8 @@ function  chemify(string) {
         
 
         branches = newbranches;
+        console.log(branches);
+
         //console.log(branches);
         newbranches = [];
         run++;
