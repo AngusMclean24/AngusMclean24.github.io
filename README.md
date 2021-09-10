@@ -1,1 +1,1 @@
-This is a chemistry speller that I made to win a challenge. It probably took more time then doing it manually but oh well.
+This is a chemistry speller that I made to win a challenge. It probably took more time then doing it manually but oh well. This is by no means exemplar code if anything it is quite the opposite. Feel free to suggest improvements!
