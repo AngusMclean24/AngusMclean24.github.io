@@ -150,7 +150,7 @@ function selectAll(){
 }
 
 function changeMode() {
-    /*
+
     var dropdown = document.getElementById("ddlViewBy");
     decrypt.style.display = "none";
     encrypt.style.display = "none";
@@ -186,7 +186,6 @@ function changeMode() {
     fix = 0;
 
     return false;
-    */
 }
 
 function translate (str){
