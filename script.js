@@ -45,7 +45,17 @@ function doTheOtherThing() {
 
     var input = getInput('myInput2');
 
-    setOutput(input, 'answer2');
+    var checkboxes = document.querySelectorAll('input[type="checkbox"]');
+    for (var checkbox of checkboxes) {
+            checkbox.checked = true;
+        }
+    checkCheckboxes();
+
+
+
+    var out = decode(input);
+
+    setOutput(out, 'answer2');
    
     //console.log("hi");
 
@@ -62,7 +72,7 @@ function setOutput(output, str) {
 function getInput(str) {
     // Get the input (also keep only letters and convert to lowercase)
     //var input = document.getElementById('input').value.toLowerCase().replace(/[^a-zA-Z]/g, "");
-    var input = document.getElementById(str).value.toLowerCase();
+    var input = document.getElementById(str).value;
 
     document.getElementById(str).value = input; // Update content of inputfield
     return input;
@@ -99,7 +109,7 @@ function checkCheckboxes(){
         var temp = document.getElementById(n); 
         
         var isthere = element_symbols.indexOf(extra_symbols[index]);
-        console.log (isthere);
+
         
         if(temp.checked == true){
             if (isthere > -1){
@@ -114,7 +124,7 @@ function checkCheckboxes(){
             if (isthere > -1){
                 element_symbols.splice(isthere, 1);
                 element_names.splice(isthere, 1);
-                console.log("hi3");         
+        
             }
 
         }
@@ -140,6 +150,7 @@ function selectAll(){
 }
 
 function changeMode() {
+    /*
     var dropdown = document.getElementById("ddlViewBy");
     decrypt.style.display = "none";
     encrypt.style.display = "none";
@@ -175,6 +186,7 @@ function changeMode() {
     fix = 0;
 
     return false;
+    */
 }
 
 function translate (str){
@@ -425,4 +437,96 @@ function isIn (input) {
     }
 }
 
-//hello
+function decode (str){
+    var output = [];
+    var word = [];
+    var i = 0;
+    var failed = [];
+    //var run = 0;
+
+    while (i < str.length){
+
+
+        
+
+        if (str[i] == ' '){
+            output += ' ';
+        } else {
+           if (isLetter(str[i]) == null) {
+                output += str[i];
+            } 
+            
+
+            else {
+                word += str[i];
+                i++;
+
+                while ((isLetter(str[i]) != null) && (str[i] != str[i].toUpperCase())){
+
+                    word += str[i];
+                    i++; 
+                }
+                i--;
+                
+
+                var result = words_to_symbols (word);
+                //console.log(result)
+
+                if (result == 'failed'){
+                    if (failed.length == 0){
+                        failed += "     The following words couldn't be converted: "
+                        //failed += " {" + word + "} failed to convert needs extra symbols;"; 
+                        failed += " {" + word + "} "; 
+                    } else {
+                        //failed += " {" + word + "} failed to convert needs extra symbols;"; 
+                        failed += " {" + word + "} "; 
+                    }
+                    
+                } else {
+                    output += result;
+                }
+
+                
+                //output += ' ' + word;
+
+                word = [];
+                
+            }
+        }
+        i++;
+    }
+
+    output += failed;
+
+    return output;
+}
+
+function words_to_symbols (str) {
+    var answer = [];
+
+
+
+    
+
+    for (i = 0; i < element_symbols.length; i++) {
+        lower = str.toLowerCase();
+        element = element_names[i];
+        element = element.toLowerCase();
+
+        if (lower == element){
+            answer = element_symbols[i];
+        }
+    }
+
+    if (answer.length == 0) {
+        answer = 'failed';
+    } 
+    
+
+    return answer;
+} 
+
+
+
+
+
